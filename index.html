@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Digital Clock</title>
+    <style>
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-color: #282c34;
+            color: white;
+            font-family: 'Arial', sans-serif;
+            overflow: hidden;
+            position: relative;
+        }
+        .container {
+            text-align: center;
+            padding: 20px;
+            border: 3px solid #61dafb;
+            border-radius: 10px;
+            background-color: #20232a;
+            box-shadow: 0 0 20px rgba(255, 255, 255, 0.2);
+            position: relative;
+        }
+        #clock {
+            font-size: 72px;
+            margin: 10px 0;
+        }
+        #date {
+            font-size: 32px;
+            margin: 10px 0;
+            color: #61dafb;
+        }
+        .creator {
+            position: absolute;
+            font-size: 18px;
+            animation: move-around 15s linear infinite;
+            white-space: nowrap;
+        }
+        @keyframes move-around {
+            0% {
+                top: 0;
+                left: 0;
+            }
+            25% {
+                top: 0;
+                left: calc(100vw - 200px);
+            }
+            50% {
+                top: calc(100vh - 50px);
+                left: calc(100vw - 200px);
+            }
+            75% {
+                top: calc(100vh - 50px);
+                left: 0;
+            }
+            100% {
+                top: 0;
+                left: 0;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <div id="date">Loading date...</div>
+        <div id="clock">Loading time...</div>
+    </div>
+
+    <div class="creator">Created by Onkar Saudagar</div>
+
+    <script>
+        function updateClock() {
+            const now = new Date();
+            const options = { year: 'numeric', month: 'long', day: 'numeric' };
+            const dateString = now.toLocaleDateString('en-US', options);
+            const hours = String(now.getHours()).padStart(2, '0');
+            const minutes = String(now.getMinutes()).padStart(2, '0');
+            const seconds = String(now.getSeconds()).padStart(2, '0');
+
+            document.getElementById('date').innerHTML = dateString;
+            document.getElementById('clock').innerHTML = `${hours}:${minutes}:${seconds}`;
+        }
+
+        setInterval(updateClock, 1000);
+        updateClock(); // initial call
+    </script>
+
+</body>
+</html>
